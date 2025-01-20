@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christian Keith Loreto - Paliwasan Archives</title>
+    <link rel="stylesheet" href="../css/archive-styles.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">Back to Main Page</a>
+    </header>
+    <div class="profile">
+        <img src="../images/person3.jpg" alt="Christian Keith Loreto" class="profile-image">
+        <h1>Christian Keith Loreto</h1>
+        <p><strong>Age:</strong> <span id="age"></span></p>
+        <p><strong>Birthday:</strong> <span id="birthday" data-birthday="2002-03-27">March 15, 1998</span></p>
+        <p><strong>Gender:</strong> <span id="gender">Male</span></p>
+        <p><strong>Address:</strong> 069 Yakal St., Paliwasan, San Miguel, Bulacan</p>
+    </div>
+    <hr>
+    <div class="bio">
+        <h2>Bio</h2>
+        <p>Think of me as a curious soul with a passion for innovation, a knack for problem-solving, and an endless drive to grow. Life’s an adventure, and I’m here for the journey.</p>
+        <ul>
+            <li>🎧 Always listening</li>
+            <li>💼 Work hard, stay humble</li>
+            <li>🌟 Positive vibes only</li>
+            <li>🚀 Chasing my dreams</li>
+        </ul>
+    </div>
+    <hr>
+    <div class="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-images">
+            <img src="../images/gallery1.jpg" alt="Gallery Image 1">
+            <img src="../images/gallery2.jpg" alt="Gallery Image 2">
+            <img src="../images/gallery3.jpg" alt="Gallery Image 3">
+            <img src="../images/gallery4.jpg" alt="Gallery Image 4">
+            <img src="../images/gallery5.jpg" alt="Gallery Image 5">
+            <img src="../images/gallery6.jpg" alt="Gallery Image 6">
+        </div>
+    </div>
+    <hr>
+    <div class="contact">
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> raichindesuma@gmail.com</p>
+        <p><strong>Phone:</strong> +1234567890</p>
+        <div class="social-media">
+            <a href="https://facebook.com/hanzel" target="_blank">Facebook</a>
+            <a href="https://twitter.com/hanzel" target="_blank">Twitter</a>
+            <a href="https://instagram.com/hanzel" target="_blank">Instagram</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge(birthday) {
+            const birthDate = new Date(birthday);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        document.getElementById('age').innerText = calculateAge(document.getElementById('birthday').dataset.birthday);
+    </script>
+</body>
+</html>

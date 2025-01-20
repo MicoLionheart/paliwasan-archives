@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive - Paliwasan Archives</title>
+    <link rel="stylesheet" href="css/archive.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-button">Back to Main Page</a>
+    </header>
+    <div class="search-form">
+        <input type="text" id="searchName" placeholder="Search by name">
+        <select id="searchGender">
+            <option value="">All Genders</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <select id="searchAge">
+            <option value="">All Ages</option>
+            <option value="child">0-12</option>
+            <option value="teen">13-19</option>
+            <option value="adult">20-59</option>
+            <option value="senior">60+</option>
+        </select>
+        <button onclick="filterResults()">Search</button>
+    </div>
+    <div class="archive-list">
+        <div class="container" data-name="Hanzel Levi Espiritu" data-gender="male" data-age="30" onclick="openModal('Hanzel Levi Espiritu', 'archives/hanzel-levi-espiritu.html')">
+            <img src="images/person1.jpg" alt="Hanzel Levi Espiritu">
+            <p>Hanzel Levi Espiritu</p>
+        </div>
+        <div class="container" data-name="John Paul Pajaro" data-gender="male" data-age="25" onclick="openModal('John Paul Pajaro', 'archives/john-paul-pajaro.html')">
+            <img src="images/person2.jpg" alt="John Paul Pajaro">
+            <p>John Paul Pajaro</p>
+        </div>
+        <div class="container" data-name="Christian Keith Loreto" data-gender="male" data-age="28" onclick="openModal('Christian Keith Loreto', 'archives/christian-keith-loreto.html')">
+            <img src="images/person3.jpg" alt="Christian Keith Loreto">
+            <p>Christian Keith Loreto</p>
+        </div>
+        <!-- Add more containers as needed -->
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDetails"></p>
+            <a id="modalLink" href="#"><button>See More</button></a>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge(birthday) {
+            const birthDate = new Date(birthday);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function openModal(title, link) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalLink').href = link;
+            fetch(link)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const birthday = doc.querySelector('#birthday').dataset.birthday;
+                    const age = calculateAge(birthday);
+                    const gender = doc.querySelector('#gender').innerText;
+                    const address = doc.querySelector('.profile p:nth-of-type(4)').innerText;
+                    document.getElementById('modalDetails').innerText = `Age: ${age}\nGender: ${gender}\n${address}`;
+                    document.getElementById('myModal').style.display = "block";
+                })
+                .catch(error => console.error('Error fetching the page:', error));
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+
+        function filterResults() {
+            const name = document.getElementById('searchName').value.toLowerCase();
+            const gender = document.getElementById('searchGender').value;
+            const ageCategory = document.getElementById('searchAge').value;
+
+            const containers = document.querySelectorAll('.archive-list .container');
+            containers.forEach(container => {
+                const personName = container.getAttribute('data-name').toLowerCase();
+                const personGender = container.getAttribute('data-gender');
+                const personAge = parseInt(container.getAttribute('data-age'));
+
+                let ageMatch = false;
+                if (ageCategory === 'child' && personAge <= 12) ageMatch = true;
+                else if (ageCategory === 'teen' && personAge >= 13 && personAge <= 19) ageMatch = true;
+                else if (ageCategory === 'adult' && personAge >= 20 && personAge <= 59) ageMatch = true;
+                else if (ageCategory === 'senior' && personAge >= 60) ageMatch = true;
+                else if (ageCategory === '') ageMatch = true;
+
+                if ((name === '' || personName.includes(name)) &&
+                    (gender === '' || personGender === gender) &&
+                    ageMatch) {
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzel Levi Espiritu - Paliwasan Archives</title>
+    <link rel="stylesheet" href="../css/archive-styles.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">Back to Main Page</a>
+    </header>
+    <div class="profile">
+        <img src="../images/person1.jpg" alt="Hanzel Levi Espiritu" class="profile-image">
+        <h1>Hanzel Levi Espiritu</h1>
+        <p><strong>Age:</strong> <span id="age"></span></p>
+        <p><strong>Birthday:</strong> <span id="birthday" data-birthday="2001-01-10">January 10, 2001</span></p>
+        <p><strong>Gender:</strong> <span id="gender">Male</span></p>
+        <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+    </div>
+    <hr>
+    <div class="bio">
+        <h2>Bio</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada.</p>
+    </div>
+    <hr>
+    <div class="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-images">
+            <img src="../images/gallery1.jpg" alt="Gallery Image 1">
+            <img src="../images/gallery2.jpg" alt="Gallery Image 2">
+            <img src="../images/gallery3.jpg" alt="Gallery Image 3">
+            <img src="../images/gallery4.jpg" alt="Gallery Image 4">
+            <img src="../images/gallery5.jpg" alt="Gallery Image 5">
+            <img src="../images/gallery6.jpg" alt="Gallery Image 6">
+        </div>
+    </div>
+    <hr>
+    <div class="contact">
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> hanzel@example.com</p>
+        <p><strong>Phone:</strong> +1234567890</p>
+        <div class="social-media">
+            <a href="https://facebook.com/hanzel" target="_blank">Facebook</a>
+            <a href="https://twitter.com/hanzel" target="_blank">Twitter</a>
+            <a href="https://instagram.com/hanzel" target="_blank">Instagram</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge(birthday) {
+            const birthDate = new Date(birthday);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        document.getElementById('age').innerText = calculateAge(document.getElementById('birthday').dataset.birthday);
+    </script>
+</body>
+</html>

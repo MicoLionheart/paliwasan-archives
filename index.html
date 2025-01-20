@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paliwasan Archives</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="archive.html">Archive</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Paliwasan Archive</h1>
+        <section id="birthdayToCome">
+            <h2>Birthday to Come</h2>
+            <div class="section-content"></div>
+        </section>
+        <section id="meetNewFace">
+            <h2>Meet New Face</h2>
+            <div class="section-content"></div>
+        </section>
+        <section id="randomize">
+            <h2>Randomize</h2>
+            <div class="section-content">
+                <div class="random-container">
+                    <div class="random-image" id="randomImage">[Image/Vacant]</div>
+                    <button onclick="randomizePerson()">Randomize</button>
+                    <p id="randomMessage"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDetails"></p>
+            <a id="modalLink" href="#"><button>See More</button></a>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
